@@ -1,18 +1,21 @@
-const dotenv = require("dotenv");
-dotenv.config();
+const express = require('express');
+const { ApolloServer } = require('apollo-server-express');
+const cors = require('cors');
+const typeDefs = require('./schemas/schema');
+const resolvers = require('./resolvers/resolver');
 
-const express = require("express");
-const pubRoutes = require("./routes/productsRoutes");
-const authRoutes = require("./routes/authRoutes");
+async function startServer() {
+  const app = express();
+  app.use(cors());
 
-const app = express();
+  const server = new ApolloServer({ typeDefs, resolvers });
+  await server.start();
 
-app.use(express.json());
-app.use("/api", pubRoutes);
-app.use("/auth", authRoutes);
+  server.applyMiddleware({ app });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
-  console.log(`URL base: https://localhost:${PORT}/`);
-});
+  app.listen({ port: 4000 }, () =>
+    console.log(`🚀 Servidor listo en http://localhost:4000${server.graphqlPath}`)
+  );
+}
+
+startServer();

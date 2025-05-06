@@ -9,12 +9,15 @@
   "author": "Jorge Betancourt",
   "license": "ISC",
   "dependencies": {
+    "apollo-server-express": "^3.13.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "firebase": "^11.5.0",
-    "firebase-admin": "^13.2.0",
+    "firebase-admin": "^13.3.0",
+    "graphql": "^16.11.0",
     "uuid": "^11.1.0"
   },
   "repository": {
